@@ -19,6 +19,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'airblade/vim-gitgutter.git'
 "Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'scrooloose/nerdcommenter'
 
 """"""""""""""""""""""""""""""""""""""""
 " COLOR SCHEMES
