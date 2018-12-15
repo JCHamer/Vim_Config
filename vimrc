@@ -10,24 +10,35 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+"Fuzzy Finder
 Plugin 'ctrlpvim/ctrlp.vim'
+
+"NERDTree
 "Plugin 'scrooloose/nerdtree'
+
+"vim airline - status bar
 Plugin 'vim-airline/vim-airline'
-"Plugin 'tpope/vim-surround'
+
+"vim surround
+Plugin 'tpope/vim-surround'
+
+"C++ Advanced Syntax Highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
+
+"YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
+
+"Auto Pairs
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'airblade/vim-gitgutter.git'
+
+"Vim Indent Guides
 "Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'scrooloose/nerdcommenter'
 
 """"""""""""""""""""""""""""""""""""""""
 " COLOR SCHEMES
 
 " See colors by running :XtermColorTable
 Plugin 'guns/xterm-color-table.vim'
-
-Plugin 'kien/rainbow_parentheses.vim'
 
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'junegunn/seoul256.vim'
@@ -61,8 +72,6 @@ filetype plugin indent on    " required
 
 set number
 
-set scrolloff=3
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -91,9 +100,6 @@ highlight ColorColumn ctermfg=138 ctermbg=240
 highlight Normal ctermfg=253 ctermbg=0
 highlight CursorLine ctermfg=253 ctermbg=238
 
-" Always on Rainbow Prens
-au VimEnter * RainbowParenthesesToggle
-
 " Airline Stuff
 let g:airline_powerline_fonts = 1
 set laststatus=2
@@ -113,7 +119,7 @@ nnoremap <C-H> <C-W><C-H>
 " YouCompleteMe Settings
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-map <F6> :YcmCompleter FixIt<CR>
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 " Ctrl-P aliases
 command CPProg CtrlP ~/Programming/Workspace
