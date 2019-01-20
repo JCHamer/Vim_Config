@@ -10,14 +10,15 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Fuzzy Finder
-Plugin 'ctrlpvim/ctrlp.vim'
-
 "NERDTree
 "Plugin 'scrooloose/nerdtree'
 
 "vim airline - status bar
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+"Allow for relative linu numbers when in focus and in normal mode
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
 
 "vim surround
 Plugin 'tpope/vim-surround'
@@ -40,19 +41,17 @@ Plugin 'jiangmiao/auto-pairs'
 " See colors by running :XtermColorTable
 Plugin 'guns/xterm-color-table.vim'
 
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'ciaranm/inkpot'
-Plugin 'zeis/vim-kolor'
-Plugin 'tomasr/molokai'
-Plugin 'jnurmine/Zenburn'
-Plugin 'dracula/vim'
-Plugin 'tyrannicaltoucan/vim-quantum'
+Plugin 'dylanaraps/wal.vim'
 
-"vim number toggle for relative lines when in normal mode, insert or
-"out-of-focus gets normal
-"Can also just use set rnu instead
-"Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+"Plugin 'nanotech/jellybeans.vim'
+"Plugin 'junegunn/seoul256.vim'
+"Plugin 'ciaranm/inkpot'
+"Plugin 'zeis/vim-kolor'
+"Plugin 'tomasr/molokai'
+"Plugin 'jnurmine/Zenburn'
+"Plugin 'dracula/vim'
+"Plugin 'tyrannicaltoucan/vim-quantum'
+"
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -83,24 +82,25 @@ set autoindent
 set cindent
 syntax on
 
-set background=dark
-set termguicolors
-let g:quantum_italics=1
-let g:airline_theme='quantum'
-
-colorscheme quantum
-
 " Turn on spelling for tex and txt files
 autocmd BufEnter *.tex set spell spelllang=en_us
 autocmd BufEnter *.txt set spell spelllang=en_us
 
-" Color settings
-set cc=80
-highlight ColorColumn ctermfg=138 ctermbg=240
-highlight Normal ctermfg=253 ctermbg=0
-highlight CursorLine ctermfg=253 ctermbg=238
+" Color Settings
+
+set background=dark
+"set termguicolors
+
+colorscheme wal
+
+"set cc=80
+"highlight ColorColumn ctermfg=138 ctermbg=240
+"highlight Normal ctermfg=253 ctermbg=0
+highlight Normal guibg=NONE ctermfg=253 ctermbg=NONE
+highlight CursorLine ctermfg=253 ctermbg=235
 
 " Airline Stuff
+let g:airline_theme='violet'
 let g:airline_powerline_fonts = 1
 set laststatus=2
 
@@ -120,7 +120,3 @@ nnoremap <C-H> <C-W><C-H>
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-
-" Ctrl-P aliases
-command CPProg CtrlP ~/Programming/Workspace
-command CPDrop CtrlP ~/Dropbox/UMich

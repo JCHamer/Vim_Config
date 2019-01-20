@@ -1,8 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/jonathan/SparkleShare/.tmp'
-let g:netrw_dirhist_2='/run/media/jonathan/JCHMedia/Programming/Workspace/PythonDev/DeepLearningClass/Vid01.py'
-let g:netrw_dirhist_3='/run/media/JCHMedia/Dropbox/UMich/F17/STATS_412/Homework/HW_06'
-let g:netrw_dirhist_4='/run/media/JCHMedia/Dropbox/UMich/W17/EECS_370/eecs_370_p3'
-let g:netrw_dirhist_5='/run/user/1000/gvfs'
-let g:netrw_dirhist_6='/home/jonathan/.vim'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/home/jonathan/.config/ranger/192.168.142.176:8000/.config'
