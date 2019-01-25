@@ -1,3 +1,12 @@
 let g:netrw_dirhistmax  =10
+<<<<<<< Updated upstream
 let g:netrw_dirhist_cnt =1
 let g:netrw_dirhist_1='/home/jonathan/.config/ranger/192.168.142.176:8000/.config'
+=======
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/jonathan/.i3'
+let g:netrw_dirhist_2='/usr/share/conky'
+let g:netrw_dirhist_3='/home/jonathan/.config/dmenu-recent'
+let g:netrw_dirhist_4='/home/jonathan/.config'
+let g:netrw_dirhist_5='/home/jonathan/Downloads/Matlab/matlab_R2018a_glnxa64/help'
+>>>>>>> Stashed changes

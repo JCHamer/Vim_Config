@@ -32,6 +32,9 @@ Plugin 'Valloric/YouCompleteMe'
 "Auto Pairs
 Plugin 'jiangmiao/auto-pairs'
 
+"Rainbow Parentheses
+Plugin 'luochen1990/rainbow'
+
 "Vim Indent Guides
 "Plugin 'nathanaelkane/vim-indent-guides'
 
@@ -42,16 +45,11 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'guns/xterm-color-table.vim'
 
 Plugin 'dylanaraps/wal.vim'
-
-"Plugin 'nanotech/jellybeans.vim'
-"Plugin 'junegunn/seoul256.vim'
-"Plugin 'ciaranm/inkpot'
-"Plugin 'zeis/vim-kolor'
-"Plugin 'tomasr/molokai'
-"Plugin 'jnurmine/Zenburn'
-"Plugin 'dracula/vim'
-"Plugin 'tyrannicaltoucan/vim-quantum'
-"
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'tomasr/molokai'
+Plugin 'dracula/vim'
+Plugin 'tyrannicaltoucan/vim-quantum'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -86,21 +84,61 @@ syntax on
 autocmd BufEnter *.tex set spell spelllang=en_us
 autocmd BufEnter *.txt set spell spelllang=en_us
 
-" Color Settings
 
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
+" Color Settings
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
 set background=dark
 "set termguicolors
-
-colorscheme wal
+"let g:quantum_italics=1
+colorscheme koehler
 
 "set cc=80
-"highlight ColorColumn ctermfg=138 ctermbg=240
 "highlight Normal ctermfg=253 ctermbg=0
-highlight Normal guibg=NONE ctermfg=253 ctermbg=NONE
-highlight CursorLine ctermfg=253 ctermbg=235
+"highlight ColorColumn ctermfg=138 ctermbg=240
+"highlight Normal guibg=NONE ctermfg=253 ctermbg=NONE
+"highlight CursorLine ctermfg=253 ctermbg=235
 
+
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
+" Rainbow Parentheses
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
+let g:rainbow_conf = {
+	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	\	'operators': '_,_',
+	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	\	'separately': {
+	\		'*': {},
+	\		'tex': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	\		},
+	\		'lisp': {
+	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	\		},
+	\		'vim': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	\		},
+	\		'html': {
+	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	\		},
+	\		'css': 0,
+	\	}
+	\}
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+
+
+
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
 " Airline Stuff
-let g:airline_theme='violet'
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
+let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 set laststatus=2
 
@@ -116,7 +154,12 @@ nnoremap <C-H> <C-W><C-H>
 " Enable normal paste
 "set paste
 
+
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
 " YouCompleteMe Settings
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
