@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible				" be iMproved, required
+filetype off					" required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -11,17 +11,38 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 "NERDTree
-"Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdtree'
 
 "vim airline - status bar
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-"Allow for relative linu numbers when in focus and in normal mode
+"vim tmux navigator to ctrl-h j,k,l across tmux splits in addition to vim panes
+" Plugin 'christoomey/vim-tmux-navigator'
+
+" Plugin for syntax highlighting on MediaWiki files
+Plugin 'chikamichi/mediawiki.vim'
+
+"Allow for relative line numbers when in focus and in normal mode
 "Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
+" Makes saving sessions easier, start with :Obsess file.vis or any other file name 
+" to start recording to a session file, then :Obsess! to stop and throw the file away
+" After having started it will continue to save the session until :qa
+"	When opening with $ vim -S file.vis it will continue to keep the file up-to-date
+Plugin 'tpope/vim-obsession'
 
 "vim surround
 Plugin 'tpope/vim-surround'
+
+"vim Commentary to toggle comments on a given line - making block comments in C
+" Plugin 'tpope/vim-commentary'
+
+" tcomment_vim - Alternative comments tool
+Plugin 'tomtom/tcomment_vim'
+
+"CamelCaseMotion to jump to next word within a camel or snake underscored multi-word phrase
+Plugin 'bkad/CamelCaseMotion'
 
 "C++ Advanced Syntax Highlighting
 Plugin 'octol/vim-cpp-enhanced-highlight'
@@ -31,13 +52,16 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'ludovicchabant/vim-gutentags'
 
 "Plugin YouCompleteMe
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 "Auto Pairs
-Plugin 'jiangmiao/auto-pairs'
+"Plugin 'jiangmiao/auto-pairs'
 
 "Rainbow Parentheses
 Plugin 'luochen1990/rainbow'
+
+"Tabular Aligning
+Plugin 'godlygeek/tabular'
 
 "Vim Indent Guides
 "Plugin 'nathanaelkane/vim-indent-guides'
@@ -48,7 +72,6 @@ Plugin 'luochen1990/rainbow'
 " See colors by running :XtermColorTable
 Plugin 'guns/xterm-color-table.vim'
 
-Plugin 'dylanaraps/wal.vim'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'tomasr/molokai'
@@ -56,38 +79,79 @@ Plugin 'dracula/vim'
 Plugin 'tyrannicaltoucan/vim-quantum'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call vundle#end()			" required
+filetype plugin indent on	" required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
 " Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginList		- lists configured plugins
+" :PluginInstall	- installs plugins; append `!` to update or just
 " :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" :PluginSearch foo	- searches for foo; append `!` to refresh local cache
+" :PluginClean		- confirms removal of unused plugins; append `!` to auto-approve removal
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-set number
+scriptencoding utf-8
+set encoding=utf-8 " will force UTF-8 helpful for airline/powerline symbols
+set hidden " Allows edited buffers to not be visible
+set number " Set line numbers
+
+" Set leader to Spacebar
+let mapleader = " "
+
+
+" Disable annoying beeping - https://stackoverflow.com/questions/18589352/how-to-disable-vim-bells-sounds
+set noerrorbells
+set vb t_vb=
+
+" Mouse fix from
+" https://superuser.com/questions/549930/cant-resize-vim-splits-inside-tmux/1017587#1017587
+if has ("mouse_sgr")
+	set ttymouse=sgr " Allows for more mouse use inside of WSL (specifically dragging to resize windows)
+end
+
+set hlsearch	" highlight all copies of the searched term
+nnoremap <silent> <leader>h :nohlsearch<CR>
+
+set nowrap		" Don't wrap lines by default
 
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+" set noexpandtab
+set expandtab
 
 set cursorline
 set mouse=a
+
+" F3 Inserts -YYYY[3letter Month]DDjhamermesh
+nnoremap <F3> "='-'.strftime("%Y%b%d").'jhamermesh'<CR>p
+inoremap <F3> <C-R>='-'.strftime("%Y%b%d").'jhamermesh'<CR>
+
+set foldmethod=syntax " set fdm=syntax " Set fold method to be syntax dependent by default global
+" Set foldmethod to indent for Python, html, & xml files to indent
+autocmd Filetype python,html,xml,sh setlocal foldmethod=indent
+"autocmd BufReadPost *.py,*.html,*.xml set fdm=indent
 
 set autoindent
 set cindent
 syntax on
 
-" Turn on spelling for tex and txt files
-autocmd BufEnter *.tex set spell spelllang=en_us
-autocmd BufEnter *.txt set spell spelllang=en_us
+" Select verilog style syntax for vh (verilog header) files
+autocmd BufNewFile,BufRead *.vh set syntax=verilog
 
+" Turn on spelling for tex and txt files
+autocmd BufEnter *.tex,*.txt set spell spelllang=en_us
+
+""""""""""""""""""""""""""""""""""""""
+" =\/============================\/= "
+" NERDTree Settings
+"let NERDTreeShowHidden=1 "Toggle via 'I'
+" =/\============================/\= "
+""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""
 " ================================== "
@@ -97,7 +161,7 @@ autocmd BufEnter *.txt set spell spelllang=en_us
 set background=dark
 "set termguicolors
 "let g:quantum_italics=1
-colorscheme koehler
+colorscheme molokai
 
 "set cc=80
 "highlight Normal ctermfg=253 ctermbg=0
@@ -105,6 +169,26 @@ colorscheme koehler
 "highlight Normal guibg=NONE ctermfg=253 ctermbg=NONE
 "highlight CursorLine ctermfg=253 ctermbg=235
 
+
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
+" tomtom/tcomment_vim configuration
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
+" Set C code comment with line comments for gc
+let g:tcomment#commentstring_c = '// %s'
+
+" Use gC for Comment Blocks
+nnoremap gC :TCommentBlock<CR>
+xnoremap gC :TCommentBlock<CR>
+
+
+""""""""""""""""""""""""""""""""""""""
+" ================================== "
+" Camel Case Motion
+" ================================== "
+""""""""""""""""""""""""""""""""""""""
+let g:camelcasemotion_key = '<leader>'
 
 """"""""""""""""""""""""""""""""""""""
 " ================================== "
@@ -149,17 +233,17 @@ set laststatus=2
 set splitright
 set splitbelow
 
-" Remap split movement to Ctrl-jklh, instead of Ctrl-w, then ctrl-j
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" " Remap split movement to Ctrl-jklh, instead of Ctrl-w, then ctrl-j
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 " Enable normal paste
 "set paste
 
 " CTags Settings
-set statusline+=%{gutentags#statusline()}
+"set statusline+=%{gutentags#statusline()}
 
 
 """"""""""""""""""""""""""""""""""""""
@@ -167,10 +251,17 @@ set statusline+=%{gutentags#statusline()}
 " YouCompleteMe Settings
 " ================================== "
 """"""""""""""""""""""""""""""""""""""
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+"let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>']
+"let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 
 
 "filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
+
+if has('gui_running')
+	set guifont=Hack:h9:cANSI:qDRAFT
+
+	"https://stackoverflow.com/a/18589653
+	autocmd GUIEnter * set vb t_vb=
+endif
